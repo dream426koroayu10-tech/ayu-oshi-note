@@ -101,9 +101,12 @@ def page_links(html: str, base_url: str) -> list[str]:
     return links
 
 
-def row_key(row: dict) -> tuple:
-    # 同じイベントページ(URL)の重複だけを排除する。昼夜公演などは別ページなので残る。
-    return (row["date"], row["title"], row["venue"], row["start"], row["url"])
+def page_no(url: str) -> int:
+    """URLのページ番号(page=2 など)。指定がなければ1ページ目。"""
+    try:
+        return int((parse_qs(urlparse(url).query).get("page") or ["1"])[0])
+    except ValueError:
+        return 1
 
 
 def fetch(session: requests.Session, url: str) -> str:
@@ -119,61 +122,78 @@ def fetch(session: requests.Session, url: str) -> str:
     raise RuntimeError(f"取得に失敗しました: {url} ({last})")
 
 
-def crawl(session: requests.Session) -> tuple[dict[tuple, dict], int | None]:
-    """全ページを集める。戻り値は (イベント辞書, イベンターノート表示の総件数)。"""
-    seen: dict[tuple, dict] = {}
-    visited: set[str] = set()
+def crawl(session: requests.Session) -> tuple[list[dict], int | None]:
+    """全ページを集める。戻り値は (一覧の全行, イベンターノート表示の総件数)。
+
+    イベンターノートの「N件」は一覧の行数そのものなので、行は1つも潰さない。
+    同じページを2回読まないよう、ページ番号で管理する(page=1 と、番号なしの1ページ目は同じページ)。
+    """
+    pages: dict[int, list[dict]] = {}
     queue = [BASE]
     total: int | None = None
     per_page = DEFAULT_PER_PAGE
     user_id = ""
+    requests_made = 0
+
+    def collected() -> int:
+        return sum(len(r) for r in pages.values())
 
     def visit(url: str) -> None:
-        nonlocal total, per_page, user_id
-        visited.add(url)
+        nonlocal total, per_page, user_id, requests_made
+        requests_made += 1
         html = fetch(session, url)
         rows = parse_page(html)
-        for row in rows:
-            seen.setdefault(row_key(row), row)
+        pages[page_no(url)] = rows
         if total is None:
             total = declared_total(html)
-        if len(visited) == 1 and rows:
-            per_page = max(len(rows), 1)
+        if page_no(url) == 1 and rows:
+            per_page = len(rows)
         for link in page_links(html, url):
             if not user_id:
                 user_id = (parse_qs(urlparse(link).query).get("user_id") or [""])[0]
-            if link not in visited and link not in queue:
+            if page_no(link) not in pages:
                 queue.append(link)
-        print(f"{url} -> {len(rows)}件 (累計{len(seen)}件 / 表示上の総数 {total if total is not None else '不明'})")
+        print(f"{url} -> {len(rows)}件 (累計{collected()}件 / 表示上の総数 {total if total is not None else '不明'})")
         time.sleep(0.7)
 
     # 1) ページ送りリンクを辿る
-    while queue and len(visited) < MAX_REQUESTS:
+    while queue and requests_made < MAX_REQUESTS:
         url = queue.pop(0)
-        if url not in visited:
+        if page_no(url) not in pages:
             visit(url)
 
     # 2) まだ足りなければ、page=1,2,3… を順番に直接読む(念のための保険)
-    if total is not None and len(seen) < total:
+    if total is not None and collected() < total:
         last_page = math.ceil(total / per_page) + 1
         for n in range(1, last_page + 1):
-            if len(seen) >= total or len(visited) >= MAX_REQUESTS:
+            if collected() >= total or requests_made >= MAX_REQUESTS:
                 break
-            url = f"{BASE}?page={n}" + (f"&user_id={user_id}" if user_id else "")
-            if url in visited:
+            if n in pages:
                 continue
+            url = f"{BASE}?page={n}" + (f"&user_id={user_id}" if user_id else "")
             try:
                 visit(url)
             except RuntimeError as e:   # 最終ページより先は存在しないことがある。そこで打ち切る
                 print(f"{url} は読み込めませんでした({e})。ここで打ち切ります。")
                 break
-    return seen, total
+
+    rows_all = [row for n in sorted(pages) for row in pages[n]]
+    return rows_all, total
 
 
 def run(session: requests.Session) -> None:
     now = datetime.now(ZoneInfo("Asia/Tokyo"))
-    seen, total = crawl(session)
-    events = sorted(seen.values(), key=lambda x: (x["date"], x["title"]), reverse=True)
+    rows, total = crawl(session)
+    events = sorted(rows, key=lambda x: (x["date"], x["title"]), reverse=True)
+
+    # 同じイベントページが一覧に複数行ある場合は、イベンターノートの表示どおり残し、ログで知らせる
+    url_count: dict[str, int] = {}
+    for e in events:
+        url_count[e["url"]] = url_count.get(e["url"], 0) + 1
+    for e in events:
+        if url_count.get(e["url"], 0) > 1:
+            print(f"(参考)同じイベントページが{url_count[e['url']]}行: {e['date']} {e['title']} {e['url']}")
+            url_count[e["url"]] = 0
 
     by_year: dict[str, int] = {}
     for e in events:
