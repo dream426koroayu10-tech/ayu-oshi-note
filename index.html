@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Ayu☻</title>
+    <meta name="description" content="Ayu/ayu_11039の推し活ノート。イベンターノートの参加記録を年・出演者ごとに整理。">
+    <meta name="theme-color" content="#d8f4ff">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%234CC3F0'/%3E%3Ccircle cx='50' cy='50' r='16' fill='white'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #12384d;
+            --muted: #4d6b7d;
+            --card: rgba(255,255,255,.76);
+            --panel: rgba(255,255,255,.94);
+            --line: rgba(18,56,77,.14);
+            --accent: #4cc3f0;
+            --accent2: #7bdcf7;
+            --accent-ink: #0a5f8a;
+            --ok: #1b7f5c;
+            --future: #d36b2b;
+            --radius: 22px;
+            --bg-sky: linear-gradient(180deg,#eefaff 0%,#d4f1fb 34%,#a9ddf4 58%,#d8f2fb 80%,#eefaff 100%);
+            --bg-dusk: linear-gradient(180deg,#0b2236 0%,#154d70 35%,#123b5a 65%,#0b2236 100%);
+            --bg-dots: radial-gradient(rgba(76,195,240,.55) 1.5px,transparent 1.8px) 0 0/22px 22px,#eaf7fc;
+            --font: "Zen Maru Gothic","Hiragino Maru Gothic ProN","Hiragino Sans","Yu Gothic UI","Meiryo",sans-serif;
+        }
+
+        body[data-bg="dusk"] {
+            --ink: #eaf7fd;
+            --muted: #a9cadb;
+            --card: rgba(255,255,255,.09);
+            --panel: #123550;
+            --line: rgba(232,246,253,.20);
+            --accent-ink: #82d8f8;
+            --ok: #6fe3bc;
+            --future: #ffb078
+        }
+
+        body[data-theme="dark"] {
+            --ink: #edf5ff;
+            --muted: #b4c3d8;
+            --card: rgba(20, 31, 53, .82);
+            --panel: #18243b;
+            --line: rgba(205, 222, 255, .17);
+            --accent: #9b8cff;
+            --accent2: #c0b6ff;
+            --accent-ink: #c5bdff;
+            --ok: #75e0ba;
+            --future: #ffc08c;
+            color-scheme: dark;
+        }
+        body[data-theme="dark"] .bg { background: #0b1020; }
+        body[data-theme="dark"] .bg::before { background: linear-gradient(140deg,#10182c 0%,#20234b 50%,#10182c 100%); }
+        body[data-theme="dark"] .orbs i { opacity: .28; }
+        body[data-theme="dark"] .btn:not(.soft):not(.ghost),
+        body[data-theme="dark"] .fab button { color: #15122b; }
+        body, .nav, .stat, .ticket, .tile, .panel, .btn, .pill {
+            transition: background-color .28s ease, color .28s ease, border-color .28s ease, box-shadow .28s ease;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            body, .nav, .stat, .ticket, .tile, .panel, .btn, .pill { transition: none !important; }
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 76px;
+            -webkit-text-size-adjust: 100%
+        }
+
+        body {
+            margin: 0;
+            font: 500 1rem/1.8 var(--font);
+            color: var(--ink);
+            background: #d8f3fb
+        }
+
+        a {
+            color: var(--accent-ink)
+        }
+
+        button {
+            font: inherit;
+            color: inherit
+        }
+
+        [hidden] {
+            display: none !important
+        }
+
+        :focus-visible {
+            outline: 3px solid var(--accent-ink);
+            outline-offset: 3px
+        }
+
+        .bg {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            overflow: hidden;
+            background: #d8f3fb
+        }
+
+            .bg::before {
+                content: "";
+                position: absolute;
+                inset: -30% 0;
+                height: 160%;
+                background: var(--bg-sky);
+                animation: slide 44s ease-in-out infinite alternate
+            }
+
+        body[data-bg="dusk"] .bg::before {
+            background: var(--bg-dusk)
+        }
+
+        body[data-bg="dots"] .bg {
+            background: var(--bg-dots)
+        }
+
+            body[data-bg="dots"] .bg::before, body[data-bg="white"] .bg::before, body[data-bg="custom"] .bg::before {
+                display: none
+            }
+
+        body[data-bg="white"] .bg {
+            background: #fff
+        }
+
+        body[data-bg="custom"] .bg::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(255,255,255,.56)
+        }
+
+        body[data-bg="dusk"] .bg::after {
+            display: none
+        }
+
+        .orbs {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden
+        }
+
+            .orbs i {
+                position: absolute;
+                border-radius: 50%;
+                background: radial-gradient(circle,rgba(255,255,255,.72) 0,transparent 68%);
+                will-change: transform
+            }
+
+                .orbs i:nth-child(1) {
+                    width: 58vmax;
+                    height: 58vmax;
+                    left: -18vmax;
+                    top: -18vmax;
+                    animation: drift1 38s ease-in-out infinite alternate
+                }
+
+                .orbs i:nth-child(2) {
+                    width: 48vmax;
+                    height: 48vmax;
+                    right: -16vmax;
+                    top: 30vh;
+                    animation: drift2 46s ease-in-out infinite alternate
+                }
+
+                .orbs i:nth-child(3) {
+                    width: 40vmax;
+                    height: 40vmax;
+                    left: 20vw;
+                    bottom: -22vmax;
+                    animation: drift3 52s ease-in-out infinite alternate
+                }
+
+        body[data-bg="custom"] .orbs {
+            display: none
+        }
+
+        .bubbles {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+            pointer-events: none
+        }
+
+        .progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            z-index: 50;
+            background: var(--accent);
+            transform: scaleX(0);
+            transform-origin: 0 50%
+        }
+
+        .wrap {
+            max-width: 1040px;
+            margin: 0 auto;
+            padding-inline: max(clamp(16px,4vw,30px),env(safe-area-inset-left));
+        }
+
+        .wrap {
+            padding-right: max(clamp(16px,4vw,30px),env(safe-area-inset-right))
+        }
+
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            background: var(--card);
+            border-bottom: 1px solid var(--line);
+            backdrop-filter: blur(16px);
+            padding-top: env(safe-area-inset-top)
+        }
+
+            .nav .wrap {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                min-height: 56px
+            }
+
+        .brand {
+            font-weight: 700;
+            white-space: nowrap;
+            color: var(--ink);
+            text-decoration: none
+        }
+
+        .links {
+            display: flex;
+            gap: 4px;
+            margin-left: auto;
+            overflow: auto;
+            scrollbar-width: none
+        }
+
+            .links::-webkit-scrollbar {
+                display: none
+            }
+
+            .links a {
+                padding: 8px 13px;
+                border-radius: 999px;
+                color: var(--ink);
+                text-decoration: none;
+                white-space: nowrap
+            }
+
+                .links a:hover {
+                    background: var(--line)
+                }
+
+                .links a[aria-current="true"] {
+                    background: var(--accent);
+                    color: #06273a;
+                    font-weight: 700
+                }
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            display: grid;
+            place-items: center;
+            text-align: center;
+            min-height: min(82svh,760px);
+            padding: 76px 0 130px
+        }
+
+            .hero .wrap {
+                position: relative;
+                z-index: 1
+            }
+
+            .hero h1 {
+                font-size: clamp(2.8rem,10vw,5.5rem);
+                line-height: 1.12;
+                letter-spacing: .04em;
+                margin: 0
+            }
+
+        .id {
+            font-size: clamp(1.2rem,4vw,1.65rem);
+            font-weight: 700;
+            color: var(--accent-ink);
+            margin: .4em 0 .8em
+        }
+
+        .bio {
+            max-width: 40em;
+            margin: 0 auto 1.5em;
+            color: var(--muted)
+        }
+
+        .acc {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 9px
+        }
+
+        .tip {
+            margin: 1.3em 0 0;
+            font-size: .84rem;
+            color: var(--muted)
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px;
+            padding: 0 17px;
+            border-radius: 999px;
+            border: 1.5px solid var(--accent);
+            background: var(--accent);
+            color: #06273a;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            transition: .25s ease
+        }
+
+            .btn.soft {
+                background: var(--card);
+                border-color: var(--line);
+                color: var(--ink);
+                backdrop-filter: blur(8px)
+            }
+
+            .btn.ghost {
+                background: transparent;
+                border-color: var(--line);
+                color: var(--ink)
+            }
+
+            .btn:hover {
+                transform: translateY(-2px)
+            }
+
+        .wave {
+            --wh: 72px;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -1px;
+            height: var(--wh);
+            background: linear-gradient(180deg,rgba(255,255,255,.55),transparent);
+            clip-path: ellipse(60% 54% at 50% 100%);
+            opacity: .9
+        }
+
+            .wave.w2 {
+                --wh: 58px;
+                opacity: .38;
+                transform: translateX(-4%);
+                animation: wave 15s linear infinite
+            }
+
+        .block {
+            padding-block: clamp(48px,7vw,82px)
+        }
+
+            .block h2 {
+                font-size: clamp(1.5rem,4.6vw,2rem);
+                margin: 0 0 .5em;
+                line-height: 1.35
+            }
+
+                .block h2::after {
+                    content: "";
+                    display: block;
+                    width: 64px;
+                    height: 3px;
+                    border-radius: 2px;
+                    background: var(--accent);
+                    margin-top: .3em
+                }
+
+        .lead {
+            max-width: 46em;
+            color: var(--muted);
+            margin: 0 0 1.2em
+        }
+
+        .statbar {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 10px;
+            margin: 18px 0
+        }
+
+        .stat {
+            padding: 15px 16px;
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            backdrop-filter: blur(8px)
+        }
+
+            .stat b {
+                display: block;
+                font-size: 1.65rem;
+                line-height: 1.1
+            }
+
+            .stat small {
+                color: var(--muted)
+            }
+
+        .filter-title {
+            font-size: .8rem;
+            color: var(--muted);
+            margin: .9em 0 .45em
+        }
+
+        .row {
+            display: flex;
+            gap: 8px;
+            overflow: auto;
+            padding: 2px 1px 8px;
+            scrollbar-width: thin
+        }
+
+        .pill {
+            flex: none;
+            min-height: 44px;
+            padding: 0 15px;
+            border-radius: 999px;
+            cursor: pointer;
+            background: var(--card);
+            border: 1px solid var(--line);
+            backdrop-filter: blur(8px);
+            transition: .25s ease
+        }
+
+            .pill[aria-pressed="true"] {
+                background: var(--accent);
+                border-color: var(--accent);
+                color: #06273a;
+                font-weight: 700
+            }
+
+            .pill .n {
+                margin-left: .35em;
+                font-size: .82em;
+                opacity: .72
+            }
+
+        .count {
+            margin: 12px 0 0;
+            color: var(--muted)
+        }
+
+        .year-group {
+            margin-top: 28px
+        }
+
+        .year-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin: 0 0 10px
+        }
+
+            .year-head h3 {
+                margin: 0;
+                font-size: 1.45rem
+            }
+
+            .year-head small {
+                color: var(--muted)
+            }
+
+        .tickets {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            gap: 10px
+        }
+
+        .ticket {
+            display: grid;
+            grid-template-columns: 96px minmax(0,1fr);
+            overflow: hidden;
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            backdrop-filter: blur(10px);
+            transition: .25s ease
+        }
+
+            .ticket:hover {
+                transform: translateX(4px);
+                border-color: var(--accent)
+            }
+
+        .stub {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 13px 8px;
+            border-right: 2px dashed var(--line);
+            text-align: center
+        }
+
+            .stub small {
+                font-size: .76rem;
+                color: var(--muted)
+            }
+
+            .stub .d {
+                font-size: 2rem;
+                font-weight: 700;
+                line-height: 1
+            }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 6px;
+            padding: 2px 8px;
+            border-radius: 999px;
+            font-size: .68rem;
+            line-height: 1.4;
+            font-weight: 700;
+            border: 1px solid currentColor
+        }
+
+            .status.past {
+                color: var(--ok)
+            }
+
+            .status.future {
+                color: var(--future)
+            }
+
+        .info {
+            padding: 14px 16px;
+            min-width: 0
+        }
+
+        .title-line {
+            display: flex;
+            gap: 8px;
+            align-items: flex-start
+        }
+
+        .info .t {
+            font-weight: 700;
+            overflow-wrap: anywhere;
+            color: var(--ink);
+            text-decoration: none;
+            line-height: 1.55
+        }
+
+            .info .t:hover {
+                text-decoration: underline
+            }
+
+        .meta-line {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px 14px;
+            margin-top: 6px;
+            color: var(--muted);
+            font-size: .88rem
+        }
+
+            .meta-line span {
+                overflow-wrap: anywhere
+            }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 8px
+        }
+
+        .tag {
+            padding: 2px 9px;
+            font-size: .72rem;
+            border: 1px solid var(--line);
+            border-radius: 999px
+        }
+
+        .event-action {
+            margin-top: 9px
+        }
+
+            .event-action a {
+                font-size: .78rem;
+                font-weight: 700;
+                text-decoration: none
+            }
+
+        .notice {
+            padding: 12px 15px;
+            background: var(--card);
+            border-left: 4px solid var(--accent);
+            border-radius: 0 14px 14px 0;
+            color: var(--muted);
+            font-size: .88rem
+        }
+
+        .empty {
+            color: var(--muted)
+        }
+
+        .oshi {
+            display: grid;
+            gap: 14px
+        }
+
+        @media(min-width:760px) {
+            .oshi {
+                grid-template-columns: repeat(3,1fr)
+            }
+        }
+
+        .tile {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            min-height: 185px;
+            padding: 22px 20px;
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            backdrop-filter: blur(8px);
+            transition: .25s ease
+        }
+
+            .tile:hover {
+                transform: translateY(-4px);
+                border-color: var(--accent)
+            }
+
+            .tile h3 {
+                margin: 0;
+                font-size: 1.5rem
+            }
+
+            .tile p {
+                margin: 0
+            }
+
+            .tile .meta {
+                font-size: .88rem;
+                color: var(--muted)
+            }
+
+        .pls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: auto;
+            padding-top: 6px
+        }
+
+        .pl {
+            display: inline-flex;
+            align-items: center;
+            min-height: 38px;
+            padding: 0 13px;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            background: var(--card);
+            color: var(--ink);
+            font-size: .82rem;
+            font-weight: 700;
+            text-decoration: none
+        }
+
+            .pl:hover {
+                border-color: var(--accent);
+                background: var(--accent);
+                color: #06273a
+            }
+
+        .songgroup {
+            max-width: 46em;
+            margin-bottom: 2em
+        }
+
+            .songgroup h3 {
+                margin: 0 0 .35em;
+                font-size: 1.2rem
+            }
+
+        .song {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 2px 12px;
+            padding: 13px 0;
+            border-top: 1px solid var(--line)
+        }
+
+            .song b {
+                font-size: 1.08rem
+            }
+
+            .song small {
+                color: var(--muted)
+            }
+
+            .song p {
+                flex-basis: 100%;
+                margin: 0;
+                color: var(--muted)
+            }
+
+        details.import {
+            margin-top: 24px;
+            padding: 16px;
+            background: var(--card);
+            border: 1px dashed var(--line);
+            border-radius: 18px
+        }
+
+            details.import summary {
+                cursor: pointer;
+                font-weight: 700
+            }
+
+        .import textarea {
+            display: block;
+            width: 100%;
+            min-height: 180px;
+            margin-top: 10px;
+            padding: 12px;
+            border: 1px solid var(--line);
+            border-radius: 13px;
+            background: var(--panel);
+            color: var(--ink);
+            font: inherit;
+            font-size: .86rem
+        }
+
+        .sync-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 14px
+        }
+
+        footer {
+            padding-block: 30px calc(110px + env(safe-area-inset-bottom));
+            color: var(--muted);
+            font-size: .82rem
+        }
+
+            footer p {
+                margin: 0 0 .45em
+            }
+
+        .fab {
+            position: fixed;
+            right: max(14px,env(safe-area-inset-right));
+            bottom: max(14px,env(safe-area-inset-bottom));
+            z-index: 30;
+            display: flex;
+            gap: 8px
+        }
+
+            .fab button {
+                min-height: 48px;
+                padding: 0 17px;
+                border: 0;
+                border-radius: 999px;
+                background: var(--accent);
+                color: #06273a;
+                font-weight: 700;
+                cursor: pointer;
+                box-shadow: 0 6px 18px -6px rgba(11,60,92,.5)
+            }
+
+        .panel {
+            position: fixed;
+            right: max(14px,env(safe-area-inset-right));
+            bottom: calc(76px + env(safe-area-inset-bottom));
+            z-index: 30;
+            width: min(340px,calc(100vw - 28px));
+            padding: 16px;
+            background: var(--panel);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            box-shadow: 0 18px 40px -16px rgba(0,0,0,.4)
+        }
+
+            .panel h2 {
+                font-size: 1rem;
+                margin: 0 0 10px
+            }
+
+        .swatches {
+            display: grid;
+            grid-template-columns: repeat(5,1fr);
+            gap: 8px
+        }
+
+        .sw {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            padding: 0;
+            border: 0;
+            background: none;
+            font-size: .68rem;
+            line-height: 1.2;
+            cursor: pointer
+        }
+
+            .sw i {
+                display: block;
+                width: 100%;
+                aspect-ratio: 1;
+                border-radius: 12px;
+                border: 2px solid var(--line)
+            }
+
+            .sw[aria-pressed="true"] i {
+                border-color: var(--accent);
+                box-shadow: 0 0 0 2px var(--accent)
+            }
+
+            .sw[data-k="sky"] i {
+                background: var(--bg-sky)
+            }
+
+            .sw[data-k="dusk"] i {
+                background: var(--bg-dusk)
+            }
+
+            .sw[data-k="dots"] i {
+                background: var(--bg-dots)
+            }
+
+            .sw[data-k="white"] i {
+                background: #fff
+            }
+
+            .sw[data-k="custom"] i {
+                display: grid;
+                place-items: center;
+                font-style: normal;
+                font-size: 1.3rem
+            }
+
+        .panel small {
+            display: block;
+            margin-top: 9px;
+            color: var(--muted)
+        }
+
+        .toast {
+            position: fixed;
+            left: 50%;
+            bottom: calc(90px + env(safe-area-inset-bottom));
+            transform: translateX(-50%);
+            z-index: 40;
+            max-width: calc(100vw - 32px);
+            padding: 10px 16px;
+            border-radius: 999px;
+            background: #12384d;
+            color: #fff;
+            font-size: .86rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .2s;
+            text-align: center
+        }
+
+            .toast.show {
+                opacity: 1
+            }
+
+        .wallpaper {
+            overflow: hidden
+        }
+
+        body.wallpaper .nav, body.wallpaper .block, body.wallpaper footer, body.wallpaper .fab, body.wallpaper .panel, body.wallpaper .bio, body.wallpaper .acc, body.wallpaper .tip, body.wallpaper .progress {
+            display: none
+        }
+
+        body.wallpaper .hero {
+            min-height: 100svh;
+            padding: 24px 0
+        }
+
+            body.wallpaper .hero h1 {
+                font-size: clamp(3.3rem,15vw,7rem)
+            }
+
+        body.wallpaper .id {
+            font-size: clamp(1.35rem,5vw,2rem)
+        }
+
+        .hint {
+            display: none
+        }
+
+        body.wallpaper .hint {
+            display: block;
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: calc(24px + env(safe-area-inset-bottom));
+            text-align: center;
+            font-size: .8rem;
+            color: var(--muted);
+            animation: hintOut 4s forwards
+        }
+
+        .js .reveal {
+            opacity: 0
+        }
+
+        .reveal.in {
+            animation: rise .65s cubic-bezier(.2,.7,.2,1) both;
+            animation-delay: calc(var(--i,0)*70ms)
+        }
+
+        .ch {
+            display: inline-block;
+            animation: drop .85s cubic-bezier(.2,.8,.2,1) backwards;
+            animation-delay: calc(var(--i)*75ms + 80ms)
+        }
+
+        @keyframes rise {
+            from {
+                opacity: 0;
+                transform: translateY(16px)
+            }
+        }
+
+        @keyframes drop {
+            from {
+                opacity: 0;
+                transform: translateY(-.4em) scale(.92);
+                filter: blur(7px)
+            }
+        }
+
+        @keyframes slide {
+            to {
+                transform: translateY(-38%)
+            }
+        }
+
+        @keyframes drift1 {
+            to {
+                transform: translate(18vmax,12vmax) scale(1.15)
+            }
+        }
+
+        @keyframes drift2 {
+            to {
+                transform: translate(-14vmax,-10vmax) scale(.9)
+            }
+        }
+
+        @keyframes drift3 {
+            to {
+                transform: translate(10vmax,-14vmax) scale(1.2)
+            }
+        }
+
+        @keyframes wave {
+            to {
+                transform: translateX(4%)
+            }
+        }
+
+        @keyframes hintOut {
+            0%,70% {
+                opacity: 1
+            }
+
+            100% {
+                opacity: 0
+            }
+        }
+
+        @media(max-width:640px) {
+            .links {
+                mask-image: linear-gradient(90deg,transparent 0,#000 16px,#000 calc(100% - 16px),transparent)
+            }
+
+            .statbar {
+                grid-template-columns: 1fr
+            }
+
+            .ticket {
+                grid-template-columns: 82px minmax(0,1fr)
+            }
+
+            .stub .d {
+                font-size: 1.7rem
+            }
+
+            .meta-line {
+                font-size: .82rem
+            }
+        }
+
+        @media(prefers-reduced-motion:reduce) {
+            html {
+                scroll-behavior: auto
+            }
+
+            *, *::before, *::after {
+                animation: none !important;
+                transition: none !important
+            }
+
+            .js .reveal {
+                opacity: 1
+            }
+        }
+    </style>
+</head>
+<body data-bg="sky">
+    <div class="bg" aria-hidden="true"></div>
+    <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
+    <canvas class="bubbles" id="bubbles" aria-hidden="true"></canvas>
+    <div class="progress" id="progress" aria-hidden="true"></div>
+
+    <header class="nav">
+        <div class="wrap">
+            <a class="brand" id="brand" href="#about"></a>
+            <nav class="links" aria-label="ページ内メニュー">
+                <a href="#about">自己紹介</a>
+                <a href="#events">参戦イベント</a>
+                <a href="#oshi">推し</a>
+                <a href="#songs">推し曲</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" id="about" aria-labelledby="siteTitle">
+            <div class="wrap">
+                <h1 id="siteTitle"></h1>
+                <p class="id" id="siteId"></p>
+                <p class="bio" id="bio"></p>
+                <div class="acc" id="acc">
+                    <button class="btn ghost" type="button" id="copyHero">IDをコピー</button>
+                </div>
+                <p class="tip">背景変更・待ち受けモードにも対応しています。</p>
+            </div>
+            <div class="wave w2" aria-hidden="true"></div>
+            <div class="wave" aria-hidden="true"></div>
+        </section>
+
+        <section class="block" id="events">
+            <div class="wrap">
+                <h2>参戦イベント</h2>
+                <p class="lead">イベンターノートに登録しているイベントを、そのまま年ごとに整理。推し以外のイベントも「すべて」に残しています。</p>
+
+                <div class="statbar" id="stats"></div>
+
+                <div class="filter-title">年で絞り込む</div>
+                <div class="row" id="years" role="group" aria-label="年で絞り込む"></div>
+
+                <div class="filter-title">出演者で絞り込む</div>
+                <div class="row" id="whos" role="group" aria-label="出演者で絞り込む"></div>
+
+                <p class="count" id="eventCount" aria-live="polite"></p>
+                <div id="eventList"></div>
+
+                <p class="more"><a id="enLink" target="_blank" rel="noopener noreferrer">イベンターノートで全記録を見る</a></p>
+
+                <details class="import" id="import">
+                    <summary>データ更新・手動取り込み</summary>
+                    <p class="notice">GitHub Pagesでは <code>events.json</code> を読み込みます。同梱のGitHub Actionsを有効にすると、毎日イベンターノートの公開イベント一覧を取得して更新できます。ローカルでHTMLを開いただけでは自動取得できません。</p>
+                    <div class="sync-row">
+                        <button class="btn" type="button" id="reloadJson">最新データを読み込む</button>
+                        <button class="btn soft" type="button" id="copyJson">JSONをコピー</button>
+                    </div>
+                    <textarea id="importText" placeholder="イベンターノートの参加イベント一覧を貼り付けることもできます"></textarea>
+                    <div class="sync-row">
+                        <button class="btn soft" type="button" id="importRun">貼り付けデータを反映</button>
+                    </div>
+                    <p id="syncMsg" class="muted" role="status" aria-live="polite"></p>
+                </details>
+            </div>
+        </section>
+
+        <section class="block" id="oshi">
+            <div class="wrap">
+                <h2>推し</h2>
+                <div class="oshi" id="oshiList"></div>
+            </div>
+        </section>
+
+        <section class="block" id="songs">
+            <div class="wrap">
+                <h2>推し曲</h2>
+                <div id="songList"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="wrap">
+        <p>個人が作った非公式のファンページです。推しのSNSは公開情報へのリンクです。</p>
+        <p id="dataInfo"></p>
+        <p><a href="#import">データ更新・手動取り込み</a></p>
+    </footer>
+
+    <div class="fab">
+        <button type="button" id="themeBtn" aria-pressed="false">🌙 ダークモード</button>
+        <button type="button" id="bgBtn" class="secondary-fab" aria-expanded="false" aria-controls="bgPanel">背景</button>
+        <button type="button" id="wallBtn">待ち受け</button>
+    </div>
+
+    <div class="panel" id="bgPanel" hidden>
+        <h2>背景をえらぶ</h2>
+        <div class="swatches" id="swatches"></div>
+        <input type="file" id="bgFile" accept="image/*" hidden>
+        <small>自分の画像は、このページを開いている間だけ使われます。</small>
+    </div>
+
+    <p class="hint">画面をタップでもどる</p>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script>
+        const ID = 'ayu_11039';
+        const SITE = {
+            title: '推し活ノート',
+            bio: '好きな人たちを追いかけて、ライブやイベントに通っています。ここは、参戦したイベントの記録と、推しのことをまとめたノートです。',
+            defaultBg: 'sky'
+        };
+        const EVENTERNOTE = 'https://www.eventernote.com/users/' + ID + '/events';
+        const ACCOUNTS = [
+            ['X', 'https://x.com/' + ID],
+            ['Instagram', 'https://www.instagram.com/' + ID + '/'],
+            ['note', 'https://note.com/' + ID],
+            ['イベンターノート', EVENTERNOTE]
+        ];
+        const OSHI = [
+            {
+                name: '伊藤美来', memo: '', links: [
+                    ['公式サイト', 'https://columbia.jp/itomiku/'], ['X', 'https://x.com/InfoItomiku'], ['X(チーム)', 'https://x.com/Team_ItoMiku'],
+                    ['Instagram', 'https://www.instagram.com/itomiku_official/'], ['YouTube', 'https://www.youtube.com/@itomiku-official/'], ['note', 'https://note.com/team_itomiku']
+                ]
+            },
+            {
+                name: '豊田萌絵', memo: '', links: [
+                    ['ブログ', 'https://ameblo.jp/toyotamoe/'], ['X', 'https://x.com/toyotamoe'], ['Instagram', 'https://www.instagram.com/toyotamoe/'],
+                    ['YouTube', 'https://www.youtube.com/@MoeshiChannel']
+                ]
+            },
+            {
+                name: 'Pyxis', memo: '豊田萌絵さんと伊藤美来さんのユニット。', links: [
+                    ['X', 'https://x.com/info_pyxis']
+                ]
+            }
+        ];
+        const SONGS = [
+            ['伊藤美来', 'ワタシイロ', '—', 'ライブで聴くたびに好きになる一曲。'],
+            ['伊藤美来', 'rotate', '39rpm', '歌詞を追いながら聴くと、より深く刺さる曲。'],
+            ['Pyxis', '（曲名を追加）', '', 'お気に入りの曲をここに追加できます。'],
+            ['豊田萌絵', '（曲名を追加）', '', 'お気に入りの曲をここに追加できます。']
+        ];
+
+        // 2026-10-08 時点で確認したイベンターノート85件のフォールバック。
+        // events.jsonが読めれば、そちらを優先して表示します。
+        const FALLBACK_EVENTS = [{ "date": "2027-03-21", "title": "伊藤美来 10th Anniversary Live Tour「39rpm」 東京", "venue": "LINE CUBE SHIBUYA (渋谷公会堂)", "open": "17:00", "start": "18:00", "end": "19:45", "who": ["伊藤美来"], "url": "" }, { "date": "2027-01-16", "title": "伊藤美来 10th Anniversary Live Tour「39rpm」愛知公演", "venue": "COMTEC PORTBASE(コムテックポートベイス)", "open": "17:00", "start": "18:00", "end": "19:30", "who": ["伊藤美来"], "url": "" }, { "date": "2027-01-11", "title": "伊藤美来 10th Anniversary Live Tour「39rpm」 大阪", "venue": "NHK大阪ホール", "open": "17:30", "start": "18:30", "end": "20:00", "who": ["伊藤美来"], "url": "" }, { "date": "2026-12-12", "title": "伊藤美来 10th Anniversary Live Tour「39rpm」香港公演", "venue": "PORTAL", "open": "17:00", "start": "18:00", "end": "20:00", "who": ["伊藤美来"], "url": "" }, { "date": "2026-11-28", "title": "伊藤美来 10th Anniversary Live Tour「39rpm」in Taipei", "venue": "CLAPPER STUDIO", "open": "17:00", "start": "18:00", "end": "19:30", "who": ["伊藤美来"], "url": "" }, { "date": "2026-11-21", "title": "東武鉄道 presents ANIMAX MUSIX 2026 supported by Lemino〖DAY2〗", "venue": "横浜アリーナ", "open": "13:00", "start": "14:30", "end": "21:00", "who": ["伊藤美来"], "url": "" }, { "date": "2026-09-20", "title": "TVアニメ『塩対応の佐藤さんが俺にだけ甘い』先行上映＆舞台挨拶", "venue": "新宿ピカデリー", "open": "-", "start": "18:00", "end": "19:00", "who": ["伊藤美来"], "url": "" }, { "date": "2026-09-19", "title": "〖出演者変更〗NAGANO ANIERA FESTA 2026 DAY1", "venue": "佐久市駒場公園", "open": "10:00", "start": "12:00", "end": "20:00", "who": ["伊藤美来", "愛美"], "url": "" }, { "date": "2026-09-12", "title": "五等分の花嫁 カードゲーム presents ラジオ『五等分の花嫁＊』公開収録イベント(昼の部)", "venue": "スタァライト劇場", "open": "13:00", "start": "14:00", "end": "15:35", "who": ["伊藤美来"], "url": "" }, { "date": "2026-09-12", "title": "五等分の花嫁 カードゲーム presents ラジオ『五等分の花嫁＊』公開収録イベント(夜の部)", "venue": "スタァライト劇場", "open": "16:30", "start": "17:30", "end": "19:00", "who": ["伊藤美来"], "url": "" }, { "date": "2026-08-30", "title": "オルケリア1st LIVE「PRINCESS RESONANCE」昼公演", "venue": "J:COMホール八王子(八王子市民会館)", "open": "13:30", "start": "14:30", "end": "16:45", "who": ["伊藤美来"], "url": "" }, { "date": "2026-08-30", "title": "オルケリア1st LIVE「PRINCESS RESONANCE」夜公演", "venue": "J:COMホール八王子(八王子市民会館)", "open": "17:30", "start": "18:30", "end": "20:30", "who": ["伊藤美来"], "url": "" }, { "date": "2026-07-26", "title": "BLUE TRIP#29@エアポートウォーク名古屋 3Fイベントステージ", "venue": "エアポートウォーク名古屋", "open": "-", "start": "13:30", "end": "15:30", "who": [], "url": "" }, { "date": "2026-07-11", "title": "Animelo Summer Live 2026 -Messenger- DAY2", "venue": "幕張メッセ 国際展示場ホール", "open": "13:00", "start": "15:00", "end": "19:40", "who": ["伊藤美来"], "url": "" }, { "date": "2026-07-05", "title": "朗読劇「星降る街2026」7/5 13:00", "venue": "大手町三井ホール", "open": "12:00", "start": "13:00", "end": "15:00", "who": ["伊藤美来"], "url": "" }, { "date": "2026-07-05", "title": "朗読劇「星降る街2026」7/5 17:00", "venue": "大手町三井ホール", "open": "16:00", "start": "17:00", "end": "19:00", "who": ["伊藤美来"], "url": "" }, { "date": "2026-07-04", "title": "豊田萌絵・伊藤美来のキラキラ大作戦! 番組イベント2026 昼の部", "venue": "科学技術館サイエンスホール", "open": "12:30", "start": "13:30", "end": "15:20", "who": ["Pyxis", "豊田萌絵", "伊藤美来", "愛美"], "url": "" }, { "date": "2026-07-04", "title": "豊田萌絵・伊藤美来のキラキラ大作戦! 番組イベント2026 夜の部", "venue": "科学技術館サイエンスホール", "open": "16:00", "start": "17:00", "end": "18:30", "who": ["Pyxis", "豊田萌絵", "伊藤美来", "愛美"], "url": "" }, { "date": "2026-05-17", "title": "伊藤美来 Orchestra Concert～Prologue to the 10th Anniversary～昼公演", "venue": "川口総合文化センター・リリア フカガワみらいホール(メインホール)", "open": "13:30", "start": "14:30", "end": "16:00", "who": ["伊藤美来"], "url": "" }, { "date": "2026-05-17", "title": "伊藤美来 Orchestra Concert～Prologue to the 10th Anniversary～夜公演", "venue": "川口総合文化センター・リリア フカガワみらいホール(メインホール)", "open": "17:30", "start": "18:30", "end": "20:00", "who": ["伊藤美来"], "url": "" }, { "date": "2026-05-10", "title": "伊藤美来Live Blu-ray「ITO MIKU Live 2025『Birth of Pops』」リリース記念イベント ゲーマーズ回 ＜第二部＞ ミニトーク＆ロングトークお渡し会", "venue": "AKIHABARAゲーマーズ本店", "open": "-", "start": "15:30", "end": "16:30", "who": ["伊藤美来"], "url": "" }, { "date": "2026-05-10", "title": "伊藤美来Live Blu-ray「ITO MIKU Live 2025『Birth of Pops』」リリース記念イベント ゲーマーズ回 ＜第一部＞ ミニトーク＆ロングトークお渡し会", "venue": "AKIHABARAゲーマーズ本店", "open": "-", "start": "13:00", "end": "14:00", "who": ["伊藤美来"], "url": "" }, { "date": "2026-05-02", "title": "五等分の花嫁 SPECIAL EVENT 2026 in TOYOTA ARENA TOKYO", "venue": "TOYOTA ARENA TOKYO(トヨタアリーナ東京)", "open": "15:30", "start": "17:00", "end": "19:35", "who": ["伊藤美来"], "url": "" }, { "date": "2026-04-19", "title": "伊藤美来Live Blu-ray「ITO MIKU Live 2025『Birth of Pops』」リリース記念イベント アニメイト回 第一部〖ミニトーク＆ロングトークお渡し会〗", "venue": "アニメイト秋葉原1号館 7F", "open": "12:30", "start": "13:00", "end": "14:00", "who": ["伊藤美来"], "url": "" }, { "date": "2026-04-05", "title": "TVアニメ「プリンセッション・オーケストラ」SPECIAL TALK SESSION 1回目", "venue": "丸の内ピカデリー", "open": "12:30", "start": "13:00", "end": "14:30", "who": ["伊藤美来"], "url": "" }, { "date": "2026-04-05", "title": "TVアニメ「プリンセッション・オーケストラ」SPECIAL TALK SESSION 2回目", "venue": "丸の内ピカデリー", "open": "15:30", "start": "16:00", "end": "17:30", "who": ["伊藤美来"], "url": "" }, { "date": "2026-04-05", "title": "TVアニメ「プリンセッション・オーケストラ」SPECIAL TALK SESSION 2回目", "venue": "丸の内ピカデリー", "open": "15:30", "start": "16:00", "end": "17:30", "who": ["伊藤美来"], "url": "" }, { "date": "2026-02-28", "title": "BanG Dream! 10th Anniversary LIVE「In the name of BanG Dream!」", "venue": "Kアリーナ横浜", "open": "13:30", "start": "15:00", "end": "20:25", "who": ["伊藤美来", "豊田萌絵", "愛美"], "url": "" }, { "date": "2026-01-10", "title": "伊藤美来 Official Fanclub「all yours」ファンミーティング2026～美来はこたつで丸くなる～ 夜の部", "venue": "CITY HALL & GALLERY GOTANDA", "open": "18:00", "start": "18:30", "end": "20:00", "who": ["伊藤美来"], "url": "" }, { "date": "2025-11-29", "title": "スタンディングライブツアー「AIMI LIVE TOUR 2025“NEW WORLD”」愛知", "venue": "名古屋DIAMOND HALL", "open": "17:15", "start": "18:00", "end": "19:30", "who": ["愛美"], "url": "" }, { "date": "2025-11-09", "title": "『いわて声優フェスタ』〖夜公演〗", "venue": "トーサイクラシックホール岩手(岩手県民会館) 大ホール", "open": "16:15", "start": "17:00", "end": "18:30", "who": ["伊藤美来", "豊田萌絵", "愛美"], "url": "" }, { "date": "2025-11-02", "title": "JR東海 presents 出発進行！バンドリ！10周年記念トークジャーニー！ 大阪公演 1部", "venue": "朝日生命ホール", "open": "12:45", "start": "13:30", "end": "15:30", "who": ["伊藤美来", "豊田萌絵"], "url": "" }, { "date": "2025-11-02", "title": "JR東海 presents 出発進行！バンドリ！10周年記念トークジャーニー！ 大阪公演 2部", "venue": "朝日生命ホール", "open": "16:35", "start": "17:30", "end": "19:30", "who": ["伊藤美来", "豊田萌絵"], "url": "" }, { "date": "2025-10-11", "title": "伊藤美来 Live 2025\"Birth of Pops\"", "venue": "LINE CUBE SHIBUYA (渋谷公会堂)", "open": "17:00", "start": "18:00", "end": "20:20", "who": ["伊藤美来"], "url": "" }, { "date": "2025-10-05", "title": "LAWSON presents TrySail 10th Anniversary Tour 2025 \"BestSail\" 愛知公演 Day2", "venue": "岡谷鋼機名古屋公会堂(名古屋市公会堂)", "open": "15:30", "start": "16:30", "end": "19:00", "who": [], "url": "" }, { "date": "2025-07-13", "title": "Pyxisのキラキラ大作戦！番組イベント2025 昼の部", "venue": "全電通労働会館 多目的ホール", "open": "13:00", "start": "13:30", "end": "15:30", "who": ["Pyxis", "豊田萌絵", "伊藤美来"], "url": "" }, { "date": "2025-07-13", "title": "Pyxisのキラキラ大作戦！番組イベント2025 夜の部", "venue": "全電通労働会館 多目的ホール", "open": "16:30", "start": "17:00", "end": "19:00", "who": ["Pyxis", "豊田萌絵", "伊藤美来"], "url": "" }, { "date": "2025-06-15", "title": "PyxisのTRIP PARTY 2025 in 茨城 DAY2", "venue": "!_茨城県内某所", "open": "-", "start": "-", "end": "-", "who": ["Pyxis", "豊田萌絵", "伊藤美来"], "url": "" }, { "date": "2025-06-14", "title": "PyxisのTRIP PARTY 2025 in 茨城 DAY1", "venue": "!_茨城県内某所", "open": "-", "start": "-", "end": "-", "who": ["Pyxis", "豊田萌絵", "伊藤美来"], "url": "" }, { "date": "2025-05-11", "title": "俊龍F～死ぬほどあのコールさせてやるよ!～", "venue": "カルッツかわさき", "open": "16:30", "start": "17:30", "end": "21:35", "who": ["Pyxis", "豊田萌絵", "伊藤美来"], "url": "" }, { "date": "2025-05-04", "title": "10th ANNIVERSARY Pyxis Celebration Party 2025～ありがとう！おめでとう！10周年！！～ ＜昼公演＞", "venue": "豊洲PIT", "open": "13:45", "start": "14:30", "end": "16:30", "who": ["Pyxis", "豊田萌絵", "伊藤美来"], "url": "" }, { "date": "2025-05-04", "title": "10th ANNIVERSARY Pyxis Celebration Party 2025～ありがとう！おめでとう！10周年！！～ ＜夜公演＞", "venue": "豊洲PIT", "open": "17:45", "start": "18:30", "end": "20:00", "who": ["Pyxis", "豊田萌絵", "伊藤美来"], "url": "" }, { "date": "2025-05-04", "title": "10th ANNIVERSARY Pyxis Celebration Party 2025～ありがとう！おめでとう！10周年！！～ ＜夜公演＞", "venue": "豊洲PIT", "open": "17:45", "start": "18:30", "end": "20:00", "who": ["Pyxis", "豊田萌絵", "伊藤美来"], "url": "" }, { "date": "2024-12-22", "title": "「富田美憂・前田佳織里の“調査のご依頼、お待ちしてます！”」SPイベント 第2部:みっくとクリスマスパーティー", "venue": "CITY HALL & GALLERY GOTANDA", "open": "17:00", "start": "17:30", "end": "19:10", "who": ["伊藤美来"], "url": "" }, { "date": "2024-12-01", "title": "DERAGAYA! 羊宮妃那 × 天希かのん [第1部]", "venue": "東別院テラスホール", "open": "13:30", "start": "14:00", "end": "15:30", "who": [], "url": "" }, { "date": "2024-12-01", "title": "DERAGAYA! 羊宮妃那 × 天希かのん [第2部]", "venue": "東別院テラスホール", "open": "16:30", "start": "17:00", "end": "18:30", "who": [], "url": "" }, { "date": "2024-11-10", "title": "オーイシマサヨシ「ギャンブリングホール」発売記念フリーライブ＠プライムツリー赤池", "venue": "プライムツリー赤池 1Fプライムホール", "open": "-", "start": "14:00", "end": "15:00", "who": [], "url": "" }, { "date": "2024-11-09", "title": "『小倉 唯 LIVE TOUR 2024 ～Bloomy × Meet you!～』愛知公演", "venue": "Niterra日本特殊陶業市民会館 フォレストホール(名古屋市民会館 大ホール)", "open": "15:30", "start": "16:35", "end": "18:55", "who": [], "url": "" }, { "date": "2024-10-20", "title": "伊藤美来 BIRTHDAY EVENT 2024 HOME&NIGHT Party 1部・HOME Party", "venue": "NEW PIER HALL(ニューピアホール)", "open": "13:30", "start": "14:30", "end": "16:30", "who": ["伊藤美来"], "url": "" }, { "date": "2024-10-20", "title": "伊藤美来 BIRTHDAY EVENT 2024 HOME&NIGHT Party 2部・NIGHT Party", "venue": "NEW PIER HALL(ニューピアホール)", "open": "18:00", "start": "19:00", "end": "21:00", "who": ["伊藤美来"], "url": "" }, { "date": "2024-09-22", "title": "劇場アニメーション『がんばっていきまっしょい』完成披露上映会", "venue": "丸の内ピカデリー", "open": "18:00", "start": "18:30", "end": "21:00", "who": ["伊藤美来"], "url": "" }, { "date": "2024-08-31", "title": "Animelo Summer Live 2024 -Stargazer- DAY2", "venue": "GMOアリーナさいたま(さいたまスーパーアリーナ)", "open": "14:00", "start": "16:00", "end": "21:15", "who": ["伊藤美来", "愛美"], "url": "" }, { "date": "2024-08-10", "title": "Pyxisのキラキラ大作戦！番組イベント2024 昼の部", "venue": "[代替]ニッショーホール(旧ヤクルトホール)(閉館)", "open": "12:30", "start": "13:30", "end": "15:00", "who": ["Pyxis", "豊田萌絵", "伊藤美来"], "url": "" }, { "date": "2024-08-10", "title": "Pyxisのキラキラ大作戦！番組イベント2024 夜の部", "venue": "[代替]ニッショーホール(旧ヤクルトホール)(閉館)", "open": "16:00", "start": "17:00", "end": "18:30", "who": ["Pyxis", "豊田萌絵", "伊藤美来"], "url": "" }, { "date": "2024-07-28", "title": "リスアニ！× 802 Palette『リスパレ！LIVE vol.1』7.28", "venue": "心斎橋BIGCAT", "open": "16:15", "start": "17:00", "end": "18:30", "who": ["伊藤美来"], "url": "" }, { "date": "2024-07-15", "title": "伊藤美来 Live Tour 2024 \"from now on\"〖東京公演〗", "venue": "TACHIKAWA STAGE GARDEN", "open": "17:00", "start": "18:00", "end": "20:00", "who": ["伊藤美来"], "url": "" }, { "date": "2024-07-13", "title": "伊藤美来 Live Tour 2024 \"from now on\"〖大阪公演〗", "venue": "NHK大阪ホール", "open": "17:00", "start": "18:00", "end": "20:00", "who": ["伊藤美来"], "url": "" }, { "date": "2024-06-29", "title": "伊藤美来 Live Tour 2024 \"from now on\"〖仙台公演〗", "venue": "東京エレクトロンホール宮城(宮城県民会館)", "open": "17:00", "start": "18:00", "end": "20:00", "who": ["伊藤美来"], "url": "" }, { "date": "2024-06-23", "title": "伊藤美来 Live Tour 2024 \"from now on\"〖名古屋公演〗", "venue": "愛知県芸術劇場 大ホール", "open": "17:30", "start": "18:30", "end": "20:30", "who": ["伊藤美来"], "url": "" }, { "date": "2024-06-15", "title": "愛美 NEW ALBUM「LIVE IT NOW」発売記念フリーミニライブ 〖愛知〗", "venue": "プライムツリー赤池 1Fプライムホール", "open": "-", "start": "14:00", "end": "15:30", "who": ["愛美"], "url": "" }, { "date": "2024-05-17", "title": "Pyxis 9th Anniversary Party 2024 ～ピクみんと作る宝石箱～＜2部＞", "venue": "初台The DOORS(初台DOORS)", "open": "15:30", "start": "16:00", "end": "17:30", "who": ["Pyxis", "豊田萌絵", "伊藤美来"], "url": "" }, { "date": "2024-04-21", "title": "伊藤美来 TVアニメ『声優ラジオのウラオモテ』オープニングテーマ「Now On Air」発売記念 伊藤美来の“なうおんパーティー＆お渡し会”〖2部〗", "venue": "!_東京都内某所", "open": "-", "start": "15:30", "end": "16:30", "who": ["伊藤美来"], "url": "" }, { "date": "2024-03-30", "title": "Lemino presents ANIMAX MUSIX 2024 SPRING", "venue": "京王アリーナTOKYO(武蔵野の森総合スポーツプラザ)メインアリーナ", "open": "12:30", "start": "14:00", "end": "20:20", "who": ["伊藤美来"], "url": "" }, { "date": "2024-03-17", "title": "「伊藤美来 カレンダー 2024.04-2025.03」発売記念 特典お渡し会　アニメイト回", "venue": "!_東京都内某所", "open": "-", "start": "-", "end": "-", "who": ["伊藤美来"], "url": "" }, { "date": "2024-03-03", "title": "オリジナルTVアニメ「夜のクラゲは泳げない」先行上映&キャストトークイベント", "venue": "丸の内ピカデリー", "open": "17:30", "start": "18:00", "end": "19:35", "who": ["伊藤美来"], "url": "" }, { "date": "2024-01-13", "title": "伊藤美来 LIVE Blu-ray「ITO MIKU Live Tour 2023『Every Day is a Gift』 サイン会 ＜一部＞", "venue": "!_東京都内某所", "open": "-", "start": "14:30", "end": "16:00", "who": ["伊藤美来"], "url": "" }, { "date": "2023-11-18", "title": "ANIMAX MUSIX 2023", "venue": "横浜アリーナ", "open": "13:00", "start": "14:30", "end": "21:10", "who": ["伊藤美来"], "url": "" }, { "date": "2023-10-28", "title": "伊藤美来～みっくと繋がる～全国4都市メッセージ交換会～ ゲーマーズ回 名古屋会場", "venue": "オルバースビルディング名古屋", "open": "-", "start": "17:00", "end": "18:00", "who": ["伊藤美来"], "url": "" }, { "date": "2023-10-22", "title": "伊藤美来 Birthday Event 2023 そうだ！ 旅行いこう！！ 一部", "venue": "NEW PIER HALL(ニューピアホール)", "open": "13:30", "start": "14:30", "end": "16:30", "who": ["伊藤美来"], "url": "" }, { "date": "2023-10-22", "title": "伊藤美来 Birthday Event 2023 そうだ！ 旅行いこう！！ 二部", "venue": "NEW PIER HALL(ニューピアホール)", "open": "18:00", "start": "19:00", "end": "21:00", "who": ["伊藤美来"], "url": "" }, { "date": "2023-10-15", "title": "～みっくと繋がる～全国4都市メッセージ交換会～ アニメイト回〖東京〗〖お渡しの部〗", "venue": "アニメイト池袋本店 9F animate hall BLACK", "open": "-", "start": "14:00", "end": "15:00", "who": ["伊藤美来"], "url": "" }, { "date": "2023-10-15", "title": "～みっくと繋がる～全国4都市メッセージ交換会～ アニメイト回〖東京〗〖お渡されの部〗", "venue": "アニメイト池袋本店 9F animate hall BLACK", "open": "-", "start": "16:30", "end": "17:30", "who": ["伊藤美来"], "url": "" }, { "date": "2023-08-27", "title": "Animelo Summer Live 2023 -AXEL- DAY3", "venue": "GMOアリーナさいたま(さいたまスーパーアリーナ)", "open": "14:00", "start": "16:00", "end": "21:30", "who": ["伊藤美来"], "url": "" }, { "date": "2023-07-01", "title": "Pyxisのキラキラ大作戦！番組イベント2023 昼の部", "venue": "科学技術館サイエンスホール", "open": "12:30", "start": "13:30", "end": "15:20", "who": ["Pyxis", "豊田萌絵", "伊藤美来"], "url": "" }, { "date": "2023-07-01", "title": "Pyxisのキラキラ大作戦！番組イベント2023 夜の部", "venue": "科学技術館サイエンスホール", "open": "-", "start": "17:00", "end": "18:30", "who": ["Pyxis", "豊田萌絵", "伊藤美来"], "url": "" }, { "date": "2023-05-21", "title": "伊藤美来 Live Tour 2023『Every Day is a gift』東京公演", "venue": "東京国際フォーラム ホールA", "open": "17:00", "start": "18:00", "end": "20:00", "who": ["伊藤美来"], "url": "" }, { "date": "2023-05-13", "title": "伊藤美来 Live Tour 2023『Every Day is a gift』名古屋公演", "venue": "岡谷鋼機名古屋公会堂(名古屋市公会堂)", "open": "17:00", "start": "18:00", "end": "20:00", "who": ["伊藤美来"], "url": "" }, { "date": "2023-05-06", "title": "伊藤美来 Live Tour 2023『Every Day is a gift』神戸公演", "venue": "神戸国際会館こくさいホール", "open": "17:30", "start": "18:30", "end": "20:30", "who": ["伊藤美来"], "url": "" }, { "date": "2023-03-04", "title": "伊藤美来 Gift for みっく会 名古屋", "venue": "!_名古屋市内某所", "open": "-", "start": "13:00", "end": "14:00", "who": ["伊藤美来"], "url": "" }, { "date": "2022-11-03", "title": "愛美 LIVE TOUR 2022 \"AIMI SOUND\" 愛知公演", "venue": "刈谷市総合文化センター アイリス 大ホール", "open": "17:00", "start": "18:00", "end": "21:00", "who": ["愛美"], "url": "" }, { "date": "2022-10-08", "title": "伊藤美来 2022 Birthday Event ”Beauty & Healthy”～美しく健康を手に入れたい女～ 〖1部〗", "venue": "NEW PIER HALL(ニューピアホール)", "open": "13:00", "start": "14:00", "end": "16:00", "who": ["伊藤美来"], "url": "" }, { "date": "2022-10-08", "title": "伊藤美来 2022 Birthday Event ”Beauty & Healthy”～美しく健康を手に入れたい女～ 〖2部〗", "venue": "NEW PIER HALL(ニューピアホール)", "open": "17:30", "start": "18:30", "end": "20:30", "who": ["伊藤美来"], "url": "" }, { "date": "2022-09-10", "title": "Inori Minase LIVE TOUR 2022 glow 愛知公演", "venue": "名古屋国際会議場 センチュリーホール", "open": "17:00", "start": "18:00", "end": "20:50", "who": [], "url": "" }, { "date": "2022-04-09", "title": "伊藤美来 Live Tour 2022『What a Sauce！』大阪公演", "venue": "グランキューブ大阪(大阪府立国際会議場)", "open": "17:00", "start": "18:00", "end": "20:00", "who": ["伊藤美来"], "url": "" }, { "date": "2021-07-18", "title": "バンドリーマー感謝キャラバン 2021 名古屋会場 2部", "venue": "ナディアパーク3F デザインホール", "open": "16:00", "start": "17:00", "end": "19:00", "who": ["伊藤美来"], "url": "" }];
+
+        (function () {
+            'use strict';
+            const $ = (s, e = document) => e.querySelector(s);
+            const safeUrl = u => /^https?:\/\//i.test(u || '') ? u : null;
+            let toastTimer;
+            function toast(msg) { const t = $('#toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove('show'), 2400) }
+            async function copyText(text, msg) { try { await navigator.clipboard.writeText(text) } catch (e) { const x = document.createElement('textarea'); x.value = text; x.style = 'position:fixed;opacity:0'; document.body.append(x); x.select(); try { document.execCommand('copy') } catch (_) { } x.remove() } toast(msg) }
+            function h(tag, props = {}, ...kids) {
+                const el = document.createElement(tag);
+                for (const k in props) { const v = props[k]; if (k === 'text') el.textContent = v; else if (k === 'style') el.style.cssText = v; else if (k.startsWith('on')) el.addEventListener(k.slice(2), v); else if (v !== false && v != null) el.setAttribute(k, v === true ? '' : v) }
+                kids.flat().forEach(c => { if (c != null && c !== false) el.append(c.nodeType ? c : document.createTextNode(c)) });
+                return el
+            }
+            const now = new Date(); const todayStr = now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0') + '-' + String(now.getDate()).padStart(2,'0');
+            const favoriteNames = OSHI.map(o => o.name);
+            const filterNames = ['all', '伊藤美来', '豊田萌絵', 'Pyxis', '愛美', 'other'];
+
+            document.title = SITE.title + ' @' + ID;
+            $('#brand').textContent = SITE.title;
+            $('#siteTitle').setAttribute('aria-label', SITE.title);
+            $('#siteTitle').append(...[...SITE.title].map((c, i) => h('span', { class: 'ch', 'aria-hidden': 'true', style: '--i:' + i, text: c })));
+            $('#siteId').textContent = '@' + ID;
+            $('#bio').textContent = SITE.bio;
+            $('#acc').prepend(...ACCOUNTS.map(a => h('a', { class: 'btn soft', href: a[1], target: '_blank', rel: 'noopener noreferrer', text: a[0] })));
+            $('#copyHero').addEventListener('click', () => copyText('@' + ID, 'IDをコピーしました'));
+            $('#enLink').href = EVENTERNOTE;
+
+            let events = FALLBACK_EVENTS.map(x => ({ ...x, who: [...(x.who || [])] }));
+            let selectedYear = 'all', selectedWho = 'all', years = [], yearBtns = [], whoBtns = [];
+            let sourceUpdatedAt = '2026-10-08', loadedFrom = 'フォールバック', verifiedInfo = '';
+
+            function normalizeRows(rows) {
+                return rows.filter(x => x && x.date && x.title).map(x => ({
+                    date: String(x.date), title: String(x.title), venue: String(x.venue || ''),
+                    open: String(x.open ?? ''), start: String(x.start ?? ''), end: String(x.end ?? ''),
+                    who: Array.isArray(x.who) ? x.who.filter(Boolean) : [], url: String(x.url || '')
+                })).sort((a, b) => b.date.localeCompare(a.date));
+            }
+            function isFuture(e) { return e.date > todayStr }
+            function labelsFor(e) { return e.who.filter(w => filterNames.includes(w)) }
+            function matchesWho(e, w) {
+                if (w === 'all') return true;
+                if (w === 'other') return !e.who.some(x => favoriteNames.includes(x) || x === '愛美');
+                return e.who.includes(w)
+            }
+            function eventCount(y, w) {
+                return events.filter(e => (y === 'all' || e.date.startsWith(y)) && matchesWho(e, w)).length
+            }
+            function makeButtons() {
+                yearBtns = ['all', ...years].map(y => {
+                    const n = h('span', { class: 'n' });
+                    const b = h('button', { class: 'pill', type: 'button', onclick: () => { selectedYear = y; renderEvents(true) } }, y === 'all' ? 'すべて' : y + '年', n);
+                    b.dataset.k = y; b._n = n; return b
+                });
+                $('#years').replaceChildren(...yearBtns);
+                whoBtns = filterNames.map(w => {
+                    const n = h('span', { class: 'n' });
+                    const label = w === 'all' ? 'みんな' : w === 'other' ? 'その他' : w;
+                    const b = h('button', { class: 'pill', type: 'button', onclick: () => { selectedWho = w; renderEvents(true) } }, label, n);
+                    b.dataset.k = w; b._n = n; return b
+                });
+                $('#whos').replaceChildren(...whoBtns)
+            }
+            function eventTicket(e, i) {
+                const d = new Date(e.date + 'T12:00:00');
+                const month = d.getMonth() + 1, day = d.getDate();
+                const wd = ['日', '月', '火', '水', '木', '金', '土'][d.getDay()];
+                const future = isFuture(e);
+                const status = h('span', { class: 'status ' + (future ? 'future' : 'past'), text: future ? '予定' : '参戦済' });
+                const timeParts = [];
+                if (e.open && e.open !== '-') timeParts.push('開場 ' + e.open);
+                if (e.start && e.start !== '-') timeParts.push('開演 ' + e.start);
+                if (e.end && e.end !== '-') timeParts.push('終演 ' + e.end);
+                const title = safeUrl(e.url) ? h('a', { class: 't', href: e.url, target: '_blank', rel: 'noopener noreferrer', text: e.title }) : h('span', { class: 't', text: e.title });
+                const more = safeUrl(e.url) ? h('div', { class: 'event-action' }, h('a', { href: e.url, target: '_blank', rel: 'noopener noreferrer', text: 'イベンターノートで詳細を見る ↗' })) : null;
+                const tagNames = e.who.length ? e.who : ([]);
+                return h('li', { class: 'ticket', style: '--i:' + Math.min(i, 10) },
+                    h('div', { class: 'stub' }, h('small', { text: month + '月' }), h('span', { class: 'd', text: String(day) }), h('small', { text: '(' + wd + ')' }), status),
+                    h('div', { class: 'info' },
+                        h('div', { class: 'title-line' }, title),
+                        e.venue ? h('div', { class: 'meta-line' }, h('span', { text: '📍 ' + e.venue })) : null,
+                        timeParts.length ? h('div', { class: 'meta-line' }, h('span', { text: timeParts.join('　') })) : null,
+                        tagNames.length ? h('div', { class: 'tags' }, tagNames.map(x => h('span', { class: 'tag', text: x }))) : null,
+                        more
+                    )
+                )
+            }
+            function renderStats() {
+                const past = events.filter(e => !isFuture(e)).length;
+                const future = events.length - past;
+                const yearsCount = years.length;
+                $('#stats').replaceChildren(
+                    h('div', { class: 'stat' }, h('b', { text: String(events.length) }), h('small', { text: '登録イベント' })),
+                    h('div', { class: 'stat' }, h('b', { text: String(past) }), h('small', { text: '参戦済み' })),
+                    h('div', { class: 'stat' }, h('b', { text: String(future) }), h('small', { text: 'これからの予定' }))
+                );
+                $('#dataInfo').textContent = 'イベントデータ ' + sourceUpdatedAt + ' ／ ' + loadedFrom + ' ／ ' + yearsCount + '年分' + verifiedInfo;
+            }
+            function renderEvents(pop = false) {
+                events = normalizeRows(events);
+                years = [...new Set(events.map(e => e.date.slice(0, 4)))];
+                if (!yearBtns.length || yearBtns.length !== years.length + 1) makeButtons();
+                yearBtns.forEach(b => { b.setAttribute('aria-pressed', b.dataset.k === selectedYear); b._n.textContent = ' ' + eventCount(b.dataset.k, selectedWho) });
+                whoBtns.forEach(b => { b.setAttribute('aria-pressed', b.dataset.k === selectedWho); b._n.textContent = ' ' + eventCount(selectedYear, b.dataset.k) });
+                const rows = events.filter(e => (selectedYear === 'all' || e.date.startsWith(selectedYear)) && matchesWho(e, selectedWho));
+                $('#eventCount').textContent = (selectedYear === 'all' ? '全期間' : selectedYear + '年') + (selectedWho === 'all' ? '' : selectedWho === 'other' ? 'のその他のイベント' : 'の' + selectedWho) + 'は' + rows.length + '件';
+                const box = $('#eventList'); box.replaceChildren();
+                if (!rows.length) { box.append(h('p', { class: 'empty', text: 'この条件のイベントはありません。' })); return }
+                const groups = new Map();
+                rows.forEach(e => { const y = e.date.slice(0, 4); if (!groups.has(y)) groups.set(y, []); groups.get(y).push(e) });
+                let n = 0;
+                for (const [y, list] of groups) {
+                    box.append(h('section', { class: 'year-group' },
+                        h('div', { class: 'year-head' }, h('h3', { text: y + '年' }), h('small', { text: list.length + '件' })),
+                        h('ul', { class: 'tickets' }, list.map(e => eventTicket(e, n++, pop)))
+                    ))
+                }
+                renderStats()
+            }
+            function renderOshi() {
+                $('#oshiList').replaceChildren(...OSHI.map(o => {
+                    const n = events.filter(e => e.who.includes(o.name)).length;
+                    return h('article', { class: 'tile' },
+                        h('h3', { text: o.name }),
+                        o.memo ? h('p', { text: o.memo }) : null,
+                        h('div', { class: 'pls' }, (o.links || []).map(l => h('a', { class: 'pl', href: l[1], target: '_blank', rel: 'noopener noreferrer', text: l[0] }))),
+                        h('p', { class: 'meta', text: '登録イベントでの出演 ' + n + ' 件' })
+                    )
+                }))
+            }
+            function renderSongs() {
+                $('#songList').replaceChildren(...OSHI.map(o => {
+                    const rows = SONGS.filter(s => s[0] === o.name);
+                    return h('div', { class: 'songgroup' },
+                        h('h3', { text: o.name }),
+                        ...rows.map(s => h('div', { class: 'song' }, h('b', { text: s[1] }), s[2] ? h('small', { text: s[2] }) : null, h('p', { text: s[3] || '' })))
+                    )
+                }))
+            }
+            function loadData(data, label) {
+                if (!data || !Array.isArray(data.events) || !data.events.length) throw new Error('events.jsonの形式が正しくありません');
+                events = normalizeRows(data.events);
+                sourceUpdatedAt = data.updatedAt || '不明';
+                loadedFrom = label;
+                // events.json にイベンターノート側の総件数があれば、表示件数と突き合わせて見せる
+                verifiedInfo = '';
+                if (typeof data.eventernoteTotal === 'number') {
+                    verifiedInfo = events.length === data.eventernoteTotal
+                        ? ' ／ イベンターノートの登録 ' + data.eventernoteTotal + '件と一致 ✓'
+                        : ' ／ ⚠ イベンターノートの登録 ' + data.eventernoteTotal + '件に対して表示 ' + events.length + '件';
+                }
+                selectedYear = 'all'; selectedWho = 'all'; yearBtns = []; whoBtns = []; years = [];
+                makeButtons(); renderStats(); renderOshi(); renderEvents(false);
+            }
+            async function loadJson() {
+                try {
+                    const r = await fetch('./events.json?ts=' + Date.now(), { cache: 'no-store' });
+                    if (!r.ok) throw new Error('HTTP ' + r.status);
+                    const data = await r.json();
+                    loadData(data, 'events.json');
+                    toast('最新のevents.jsonを読み込みました');
+                } catch (e) { toast('events.jsonを読み込めないため、内蔵データを表示しています'); $('#syncMsg').textContent = '読み込みに失敗しました: ' + e.message }
+            }
+            $('#reloadJson').addEventListener('click', loadJson);
+            $('#copyJson').addEventListener('click', () => copyText(JSON.stringify({ updatedAt: sourceUpdatedAt, events }, null, 2), 'JSONをコピーしました'));
+            function parsePasted(text) {
+                const re = /(\d{4})[-/.年]\s*(\d{1,2})[-/.月]\s*(\d{1,2})日?/g, marks = []; let m;
+                while ((m = re.exec(text))) marks.push({ i: m.index, end: re.lastIndex, date: m[1] + '-' + m[2].padStart(2, '0') + '-' + m[3].padStart(2, '0') });
+                const out = []; marks.forEach((mk, k) => {
+                    let block = text.slice(mk.end, k + 1 < marks.length ? marks[k + 1].i : text.length);
+                    block = block.replace(/^\s*[（(][^)）]*[)）]/, '');
+                    const lines = block.split(/\r?\n|\t/).map(x => x.trim()).filter(Boolean);
+                    const meta = s => /^(会場|出演者?|開場|開演|終演)/.test(s) || /^[-・●]/.test(s);
+                    const title = (lines.find(s => !meta(s)) || '').replace(/\s*会場[:：].*$/, '').trim();
+                    if (!title) return;
+                    const vm = block.match(/会場[:：]\s*(.+?)(?=\s+開場|\s+開演|\s+終演|\r?\n|\t|$)/);
+                    const tm = block.match(/開場\s*([0-9:.-]+|-)\s*開演\s*([0-9:.-]+|-)\s*終演\s*([0-9:.-]+|-)/);
+                    const who = [...new Set([...favoriteNames, '愛美'].filter(n => block.includes(n)))];
+                    out.push({ date: mk.date, title, venue: vm ? vm[1].trim() : '', open: tm ? tm[1] : '', start: tm ? tm[2] : '', end: tm ? tm[3] : '', who, url: '' });
+                });
+                return out
+            }
+            $('#importRun').addEventListener('click', () => {
+                const text = $('#importText').value.trim();
+                const rows = parsePasted(text);
+                if (!rows.length) { $('#syncMsg').textContent = '日付とイベント名を読み取れませんでした。'; return }
+                const existing = normalizeRows(rows.concat(events));
+                // 完全一致だけを一重化。ただしEventernote側に実際に存在する同一レコードは、events.jsonから読み込んだ場合は保持します。
+                const keySet = new Set(); const merged = [];
+                for (const x of existing) { const k = [x.date, x.title, x.venue, x.start, x.end].join('|'); if (keySet.has(k)) continue; keySet.add(k); merged.push(x) }
+                events = merged; sourceUpdatedAt = new Date().toISOString().slice(0, 10); loadedFrom = '手動取り込み'; verifiedInfo = '';
+                yearBtns = []; whoBtns = []; years = []; makeButtons(); renderStats(); renderOshi(); renderEvents(true);
+                $('#syncMsg').textContent = rows.length + '件を読み取りました。手動取り込みの重複は自動整理しています。'
+            });
+
+            // 背景
+            const BGS = [['sky', '空の水色'], ['dusk', '夜の水色'], ['dots', '水玉'], ['white', '白'], ['custom', '画像']];
+            let customUrl = null; const bgLayer = $('.bg'), panel = $('#bgPanel');
+            const swatchBtns = BGS.map(([k, label]) => h('button', { class: 'sw', type: 'button', 'data-k': k, onclick: () => k === 'custom' ? $('#bgFile').click() : setBg(k) }, h('i', { text: k === 'custom' ? '＋' : '' }), label));
+            $('#swatches').append(...swatchBtns);
+            function setBg(name, img) {
+                document.body.dataset.bg = name;
+                bgLayer.style.backgroundImage = name === 'custom' ? 'url("' + img + '")' : '';
+                swatchBtns.forEach(b => b.setAttribute('aria-pressed', b.dataset.k === name));
+                if (name !== 'custom') { try { localStorage.setItem('oshi-bg', name) } catch (e) { } }
+            }
+            $('#bgFile').addEventListener('change', e => { const f = e.target.files[0]; if (!f || !f.type.startsWith('image/')) return; if (customUrl) URL.revokeObjectURL(customUrl); customUrl = URL.createObjectURL(f); setBg('custom', customUrl) });
+            let saved = null; try { saved = localStorage.getItem('oshi-bg') } catch (e) { }
+            setBg(BGS.some(x => x[0] === saved) ? saved : SITE.defaultBg);
+
+            const bgBtn = $('#bgBtn');
+            // ライト／ダークテーマはユーザー設定として保存
+            const themeBtn = $('#themeBtn');
+            function setTheme(theme) {
+                document.body.dataset.theme = theme;
+                const dark = theme === 'dark';
+                themeBtn.setAttribute('aria-pressed', String(dark));
+                themeBtn.textContent = dark ? '☀️ ライトモード' : '🌙 ダークモード';
+                try { localStorage.setItem('oshi-theme', theme); } catch (e) {}
+            }
+            let savedTheme = 'light';
+            try { savedTheme = localStorage.getItem('oshi-theme') || 'light'; } catch (e) {}
+            setTheme(savedTheme === 'dark' ? 'dark' : 'light');
+            themeBtn.addEventListener('click', () => setTheme(document.body.dataset.theme === 'dark' ? 'light' : 'dark'));
+            function togglePanel(open) { panel.hidden = !open; bgBtn.setAttribute('aria-expanded', open) }
+            bgBtn.addEventListener('click', () => togglePanel(panel.hidden));
+            document.addEventListener('click', e => { if (!panel.hidden && !panel.contains(e.target) && e.target !== bgBtn) togglePanel(false) });
+
+            // wallpaper
+            const body = document.body;
+            $('#wallBtn').addEventListener('click', () => { togglePanel(false); body.classList.add('wallpaper'); scrollTo(0, 0) });
+            document.addEventListener('click', e => { if (body.classList.contains('wallpaper')) { body.classList.remove('wallpaper'); e.stopPropagation() } }, true);
+            document.addEventListener('keydown', e => { if (e.key === 'Escape') { body.classList.remove('wallpaper'); togglePanel(false) } });
+
+            // scroll spy / progress
+            document.documentElement.classList.add('js');
+            const revealEls = [...document.querySelectorAll('.block h2,.lead,.statbar,.filter-title,.row,.count,#eventList,.tile,.songgroup,.more,.import')];
+            revealEls.forEach((el, i) => { el.classList.add('reveal'); el.style.setProperty('--i', Math.min(i, 5)) });
+            const motionOK = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if ('IntersectionObserver' in window && motionOK) { const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target) } }), { rootMargin: '0px 0px -8% 0px' }); revealEls.forEach(el => io.observe(el)) }
+            else revealEls.forEach(el => el.classList.add('in'));
+            const navLinks = [...document.querySelectorAll('.links a')];
+            if ('IntersectionObserver' in window) {
+                const spy = new IntersectionObserver(es => es.forEach(en => { if (!en.isIntersecting) return; navLinks.forEach(a => a.removeAttribute('aria-current')); const a = navLinks.find(x => x.getAttribute('href') === '#' + en.target.id); if (a) a.setAttribute('aria-current', 'true') }), { rootMargin: '-40% 0px -55% 0px' });
+                ['about', 'events', 'oshi', 'songs'].forEach(id => spy.observe(document.getElementById(id)))
+            }
+            const bar = $('#progress'); let ticking = false;
+            function onScroll() { if (ticking) return; ticking = true; requestAnimationFrame(() => { const max = document.documentElement.scrollHeight - innerHeight; bar.style.transform = 'scaleX(' + (max > 0 ? Math.min(scrollY / max, 1) : 0) + ')'; ticking = false }) }
+            addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+            // bubbles
+            (function () {
+                const cv = $('#bubbles'); if (!cv || !motionOK || !cv.getContext) return; const ctx = cv.getContext('2d'); let W = 0, H = 0, dpr = 1, last = 0, raf = 0;
+                const list = [], mouse = { x: -999, y: -999 };
+                function make(initial) { const r = 6 + Math.pow(Math.random(), 2.2) * 34; return { r, x: Math.random() * W, y: initial ? Math.random() * H : H + r + Math.random() * 80, vy: 10 + r * 1.1 + Math.random() * 10, sway: 8 + Math.random() * 22, ph: Math.random() * 6.28, sp: .4 + Math.random() * .7, a: .45 + Math.random() * .45, pop: 0 } }
+                function resize() { dpr = Math.min(devicePixelRatio || 1, 2); W = innerWidth; H = innerHeight; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); const n = Math.round(Math.min(44, Math.max(16, W * H / 36000))); while (list.length < n) list.push(make(true)); list.length = Math.min(list.length, n) }
+                function draw(b) { const dark = document.body.dataset.bg === 'dusk', x = b.x + Math.sin(b.ph) * b.sway, r = b.r * (1 + b.pop * .6); ctx.globalAlpha = b.a * (1 - b.pop); const g = ctx.createRadialGradient(x - r * .3, b.y - r * .3, r * .1, x, b.y, r); g.addColorStop(0, dark ? 'rgba(255,255,255,.13)' : 'rgba(255,255,255,.58)'); g.addColorStop(.7, 'rgba(120,210,245,.12)'); g.addColorStop(1, dark ? 'rgba(76,195,240,.34)' : 'rgba(76,195,240,.3)'); ctx.beginPath(); ctx.arc(x, b.y, r, 0, 6.2832); ctx.fillStyle = g; ctx.fill(); ctx.lineWidth = 1.3; ctx.strokeStyle = dark ? 'rgba(190,235,252,.8)' : 'rgba(30,140,200,.45)'; ctx.stroke(); ctx.beginPath(); ctx.ellipse(x - r * .38, b.y - r * .42, r * .22, r * .12, -.6, 0, 6.2832); ctx.fillStyle = 'rgba(255,255,255,.9)'; ctx.fill() }
+                function step(t) { const dt = Math.min((t - last) / 1000 || 0, .05); last = t; ctx.clearRect(0, 0, W, H); for (const b of list) { if (b.pop) { b.pop += dt * 3.2; if (b.pop >= 1) { Object.assign(b, make(false)); continue } draw(b); continue } b.y -= b.vy * dt; b.ph += b.sp * dt; const bx = b.x + Math.sin(b.ph) * b.sway, dx = bx - mouse.x, dy = b.y - mouse.y, d = Math.hypot(dx, dy), R = b.r + 70; if (d < R && d > 0) { const f = (1 - d / R) * 60 * dt; b.x += dx / d * f; b.y += dy / d * f * .5 } if (b.y < -b.r - 10) { Object.assign(b, make(false)); continue } draw(b) } raf = requestAnimationFrame(step) }
+                resize(); addEventListener('resize', resize); addEventListener('pointermove', e => { if (e.pointerType === 'mouse') { mouse.x = e.clientX; mouse.y = e.clientY } }, { passive: true }); addEventListener('pointerdown', e => { for (const b of list) { if (b.pop) continue; if (Math.hypot(b.x + Math.sin(b.ph) * b.sway - e.clientX, b.y - e.clientY) < b.r + 10) { b.pop = .01; break } } }, { passive: true }); document.addEventListener('visibilitychange', () => { cancelAnimationFrame(raf); if (!document.hidden) { last = performance.now(); raf = requestAnimationFrame(step) } }); raf = requestAnimationFrame(step)
+            })();
+
+            // initial
+            makeButtons(); renderStats(); renderOshi(); renderSongs(); renderEvents(false);
+            // GitHub Pagesでは events.json を優先。file://直開きなどではフォールバック。
+            loadJson();
+        })();
+    </script>
+</body>
+</html>
